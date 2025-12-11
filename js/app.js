@@ -23,9 +23,8 @@ async function fetchMovies() {
     renderMovies();
 }
 
-
 function initHorizontalSlider() {
-    const randomSlides = movies.slice(0, 25); // 25 film sliderə qoymuşam
+    const randomSlides = movies.slice(0, 25);
     const track = document.getElementById("h-track");
 
     track.innerHTML = randomSlides.map(m => `
@@ -41,10 +40,9 @@ document.getElementById("h-prev").onclick = () => scrollHSlider(-1);
 
 function scrollHSlider(dir) {
     const track = document.getElementById("h-track");
-    const scrollAmount = 260 * dir; // 220px card + 20px gap
-
+    const slideWidth = track.querySelector('.h-slide').offsetWidth + 20; // gap 20px
     track.scrollBy({
-        left: scrollAmount,
+        left: slideWidth * dir,
         behavior: "smooth"
     });
 }
