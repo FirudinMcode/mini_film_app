@@ -40,7 +40,7 @@ document.getElementById("h-prev").onclick = () => scrollHSlider(-1);
 
 function scrollHSlider(dir) {
     const track = document.getElementById("h-track");
-    const slideWidth = track.querySelector('.h-slide').offsetWidth + 20; // gap 20px
+    const slideWidth = track.querySelector('.h-slide').offsetWidth + 20; 
     track.scrollBy({
         left: slideWidth * dir,
         behavior: "smooth"
