@@ -8,7 +8,6 @@ const movieList = document.getElementById("movieList");
 const searchInput = document.getElementById("searchInput");
 const genreFilter = document.getElementById("genreFilter");
 const pageNumber = document.getElementById("pageNumber");
-const sliderTrack = document.getElementById("slider-track");
 
 function goTo(url) {
     document.body.classList.add("page-transition");
@@ -20,34 +19,34 @@ async function fetchMovies() {
     movies = await res.json();
     filtered = movies;
 
-    initSlider();
+    initHorizontalSlider(); 
     renderMovies();
 }
 
-function initSlider() {
-    const randomSlides = movies.sort(() => Math.random() - 0.5).slice(0, 5);
 
-    sliderTrack.innerHTML = randomSlides.map(m => `
-        <div class="slider-item"
-             style="background-image:url('${m.image?.original}')">
-            <h2 class="text-3xl bg-black/60 p-3 rounded">${m.name}</h2>
+function initHorizontalSlider() {
+    const randomSlides = movies.slice(0, 25); // 25 film sliderə qoymuşam
+    const track = document.getElementById("h-track");
+
+    track.innerHTML = randomSlides.map(m => `
+        <div class="h-slide" style="background-image:url('${m.image?.medium}')"
+             onclick="goTo('./pages/movie.html?id=${m.id}')">
+            <div class="h-slide-title">${m.name}</div>
         </div>
     `).join("");
 }
 
-let sliderIndex = 0;
+document.getElementById("h-next").onclick = () => scrollHSlider(1);
+document.getElementById("h-prev").onclick = () => scrollHSlider(-1);
 
-document.getElementById("next").onclick = () => slide(1);
-document.getElementById("prev").onclick = () => slide(-1);
+function scrollHSlider(dir) {
+    const track = document.getElementById("h-track");
+    const scrollAmount = 260 * dir; // 220px card + 20px gap
 
-function slide(dir) {
-    const count = sliderTrack.children.length;
-    sliderIndex = (sliderIndex + dir + count) % count;
-
-    sliderTrack.style.transform = `
-        translateX(-${sliderIndex * 100}%)
-        rotateY(${dir * -25}deg)
-    `;
+    track.scrollBy({
+        left: scrollAmount,
+        behavior: "smooth"
+    });
 }
 
 function renderMovies() {

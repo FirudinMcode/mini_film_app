@@ -18,9 +18,9 @@ async function loadMovie() {
             <p class="text-gray-300 mb-4">${m.summary}</p>
 
             <div class="flex flex-wrap gap-4 text-gray-400">
-                <p><b>Genres:</b> ${m.genres.join(", ")}</p>
-                <p><b>Rating:</b> ${m.rating.average}</p>
-                <p><b>Premiered:</b> ${m.premiered}</p>
+                <p><b>Janr:</b> ${m.genres.join(", ")}</p>
+                <p><b>Reytinq:</b> ${m.rating.average}</p>
+                <p><b>Tarix:</b> ${m.premiered}</p>
             </div>
         </div>
     `;
